@@ -2,31 +2,31 @@
 
 TaskFlow è una web application per la gestione di task e progetti, ispirata a strumenti come Asana.
 
-L'obiettivo del progetto è simulare un sistema reale di task management, permettendo agli utenti di organizzare il lavoro in modo strutturato e scalabile.
+L’obiettivo del progetto è simulare un sistema reale di task management, con un’architettura client-server e gestione completa della logica applicativa.
 
 ---
 
 ## 🚀 Features
 
-- Creazione e gestione di task
-- Organizzazione dei task per progetti
-- Aggiornamento dello stato dei task (es. To Do, In Progress, Done)
-- Interfaccia client-server separata
-- Gestione delle richieste tramite API
+- Creazione e gestione task
+- Organizzazione per progetti
+- Aggiornamento stato task (To Do, In Progress, Done)
+- CRUD completo
+- Comunicazione client-server tramite API
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+- HTML
+- CSS / SCSS
 - JavaScript
-- HTML / CSS
-- (aggiungi framework se usi React o altro)
 
 ### Backend
-- Node.js / Laravel (scegli quello corretto)
+- Laravel
 - Express / Laravel API
-- MySQL / altro DB
+- MySQL
 
 ### Tools
 - Git & GitHub
@@ -36,21 +36,22 @@ L'obiettivo del progetto è simulare un sistema reale di task management, permet
 
 ## 🧠 Architettura
 
-Il progetto è strutturato in due parti principali:
+Il progetto è suddiviso in due parti principali:
 
 - **Client** → gestione interfaccia utente
 - **Server** → gestione logica applicativa e API
 
-Questa separazione riflette un'architettura tipica delle applicazioni moderne.
+Questa separazione riflette un’architettura tipica delle applicazioni moderne basate su API.
 
 ---
 
 ## ⚙️ Funzionalità tecniche
 
 - API REST per la gestione dei task
-- CRUD completo (Create, Read, Update, Delete)
-- Gestione dello stato applicativo
-- Comunicazione client-server
+- Operazioni CRUD complete
+- Gestione stato task
+- Struttura modulare backend
+- Connessione e gestione database
 
 ---
 
