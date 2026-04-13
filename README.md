@@ -1,18 +1,18 @@
 # TaskFlow
 
-TaskFlow è una web application per la gestione di task e progetti, ispirata a strumenti come Asana.
+TaskFlow è una web application full stack per la gestione di task e workflow, ispirata a strumenti come Asana.
 
-L’obiettivo del progetto è simulare un sistema reale di task management, con un’architettura client-server e gestione completa della logica applicativa.
+L’applicazione è progettata con architettura client-server e utilizza API REST per la gestione dei dati, simulando il funzionamento di un sistema reale di task management.
 
 ---
 
 ## 🚀 Features
 
 - Creazione e gestione task
-- Organizzazione per progetti
+- Organizzazione per progetti e workflow
 - Aggiornamento stato task (To Do, In Progress, Done)
 - CRUD completo
-- Comunicazione client-server tramite API
+- Comunicazione client-server tramite API REST
 
 ---
 
@@ -25,7 +25,6 @@ L’obiettivo del progetto è simulare un sistema reale di task management, con 
 
 ### Backend
 - Laravel
-- Express / Laravel API
 - MySQL
 
 ### Tools
@@ -38,8 +37,8 @@ L’obiettivo del progetto è simulare un sistema reale di task management, con 
 
 Il progetto è suddiviso in due parti principali:
 
-- **Client** → gestione interfaccia utente
-- **Server** → gestione logica applicativa e API
+- **Client** → gestione interfaccia utente  
+- **Server** → gestione logica applicativa e API  
 
 Questa separazione riflette un’architettura tipica delle applicazioni moderne basate su API.
 
@@ -47,11 +46,11 @@ Questa separazione riflette un’architettura tipica delle applicazioni moderne 
 
 ## ⚙️ Funzionalità tecniche
 
-- API REST per la gestione dei task
-- Operazioni CRUD complete
-- Gestione stato task
-- Struttura modulare backend
-- Connessione e gestione database
+- API REST per la gestione dei task  
+- Operazioni CRUD complete  
+- Gestione stato task  
+- Struttura modulare backend  
+- Connessione e gestione database  
 
 ---
 
@@ -61,5 +60,45 @@ Questa separazione riflette un’architettura tipica delle applicazioni moderne 
 
 ```bash
 cd server
-npm install
-npm start
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+## 📸 Screenshots
+
+### Dashboard
+Panoramica generale dell’applicazione.
+
+<p align="center">
+  <img src="screenshots/dashboard.png" width="700"/>
+</p>
+
+---
+
+### Task List
+Visualizzazione dei task organizzati per progetto.
+
+<p align="center">
+  <img src="screenshots/task_list.png" width="700"/>
+</p>
+
+---
+
+### Create Task
+Creazione di un nuovo task.
+
+<p align="center">
+  <img src="screenshots/new_task.png" width="700"/>
+</p>
+
+---
+
+### Edit Task
+Modifica e aggiornamento dei task.
+
+<p align="center">
+  <img src="screenshots/edit_task.png" width="700"/>
+</p>
