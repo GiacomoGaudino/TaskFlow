@@ -96,9 +96,34 @@ Creazione di un nuovo task.
 
 ---
 
-### Edit Task
+### Update Task
 Modifica e aggiornamento dei task.
 
 <p align="center">
   <img src="screenshots/edit_task.png" width="700"/>
+</p>
+
+---
+
+### Login
+Accesso all'applicazione.
+
+<p align="center">
+  <img src="screenshots/login.png" width="700"/>
+</p>
+
+---
+
+### Register
+Registrazione di un nuovo utente.
+<p align="center">
+  <img src="screenshots/register.png" width="700"/>
+</p>
+
+---
+
+### Admin User Management
+Gestione degli utenti da parte dell'amministratore.
+<p align="center">
+  <img src="screenshots/user_list.png" width="700"/>
 </p>
