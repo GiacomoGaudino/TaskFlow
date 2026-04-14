@@ -29,7 +29,7 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -37,7 +37,11 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        return $user->id === $task->user_id || $user->isAdmin();
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return $task->users->contains($user);
     }
 
     /**

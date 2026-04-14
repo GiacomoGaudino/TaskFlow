@@ -81,25 +81,31 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
 
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'users' => 'nullable|array',
-            'users.*' => 'exists:users,id',
-            'due_date' => 'nullable|date',
-            'completed' => 'boolean',
-        ]);
+        $user = auth()->user();
 
-        $task->update([
-            'title' => $data['title'],
-            'description' => $data['description'] ?? null,
-            'due_date' => $data['due_date'] ?? null,
-            'completed' => $data['completed'] ?? false,
-        ]);
+        if ($user->isAdmin()) {
+            $data = $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'users' => 'nullable|array',
+                'users.*' => 'exists:users,id',
+                'due_date' => 'nullable|date',
+                'completed' => 'nullable|boolean',
+            ]);
 
-        $task->users()->sync($request->users ?? []);
+            $task->update($data);
+            $task->users()->sync($request->users ?? []);
+        } else {
+            $data = $request->validate([
+                'completed' => 'required|boolean',
+            ]);
 
-        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+            $task->update([
+                'completed' => $data['completed']
+            ]);
+        }
+
+        return redirect()->route('tasks.index')->with('success', 'Task aggiornata');
     }
 
     /**

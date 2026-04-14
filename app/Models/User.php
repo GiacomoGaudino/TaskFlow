@@ -75,4 +75,15 @@ class User extends Authenticatable
             ? Task::all()
             : $this->tasks;
     }
+
+    public function promote(User $user)
+    {
+        abort_if(!auth()->user()->isAdmin(), 403);
+
+        $adminRole = Role::where('name', 'admin')->firstOrFail();
+
+        $user->roles()->syncWithoutDetaching([$adminRole->id]);
+
+        return back()->with('success', 'Utente promosso ad admin 🚀');
+    }
 }

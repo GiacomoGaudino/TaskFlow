@@ -18,7 +18,9 @@
             <nav class="space-y-2">
                 <a href="{{ route('dashboard') }}" class="block p-2 rounded hover:bg-gray-100">Dashboard</a>
                 <a href="{{ route('tasks.index') }}" class="block p-2 rounded hover:bg-gray-100">Tasks</a>
-                <a href="{{ route('tasks.create') }}" class="block p-2 rounded hover:bg-gray-100">Crea Task</a>
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('tasks.create') }}" class="block p-2 rounded hover:bg-gray-100">Crea Task</a>
+                @endif
             </nav>
         </aside>
 

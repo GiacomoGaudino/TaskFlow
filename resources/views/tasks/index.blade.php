@@ -5,10 +5,11 @@
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">I tuoi Task</h2>
 
-        <a href="{{ route('tasks.create') }}"
-            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            + Nuovo Task
-        </a>
+        @if(auth()->user()->isAdmin())
+            <a href="{{ route('tasks.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                + Nuovo Task
+            </a>
+        @endif
     </div>
 
     @if(session('success'))
@@ -40,7 +41,7 @@
                     <!-- STATUS -->
                     <span
                         class="inline-block mt-3 text-xs px-3 py-1 rounded-full
-                                                {{ $task->completed ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                                        {{ $task->completed ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
                         {{ $task->completed ? 'Completato' : 'In corso' }}
                     </span>
 
@@ -58,11 +59,11 @@
                     <!-- SCADENZA -->
                     @if($task->due_date)
                         <div class="mt-2 text-xs
-                                                                    @if(\Carbon\Carbon::parse($task->due_date)->isPast())
-                                                                        text-red-600
-                                                                    @else
-                                                                        text-gray-500
-                                                                    @endif">
+                                                                                @if(\Carbon\Carbon::parse($task->due_date)->isPast())
+                                                                                    text-red-600
+                                                                                @else
+                                                                                    text-gray-500
+                                                                                @endif">
                             📅 {{ \Carbon\Carbon::parse($task->due_date)->format('d/m/Y') }}
                         </div>
                     @endif

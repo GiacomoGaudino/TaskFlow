@@ -14,48 +14,47 @@
             <!-- TITLE -->
             <div>
                 <label class="text-sm text-gray-600">Titolo</label>
-                <input type="text" name="title" value="{{ $task->title }}"
-                    class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none" required>
+                <input type="text" name="title" value="{{ old('title', $task->title) }}"
+                    class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none" @cannot('update', $task)
+                    disabled @endcannot>
             </div>
 
             <!-- DESCRIPTION -->
             <div>
                 <label class="text-sm text-gray-600">Descrizione</label>
-                <textarea name="description"
-                    class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none">{{ $task->description }}</textarea>
+                <textarea name="description" class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none"
+                    @cannot('update', $task) disabled @endcannot>{{ old('description', $task->description) }}</textarea>
             </div>
 
-            <!-- MULTIUSER -->
-            <div>
-                <label class="text-sm text-gray-600">Assegna utenti</label>
+            <!-- USERS (solo admin) -->
+            @if(auth()->user()->isAdmin())
+                <div>
+                    <label class="text-sm text-gray-600">Assegna utenti</label>
 
-                <select name="users[]" multiple class="w-full border rounded-lg px-4 py-2">
+                    <select name="users[]" multiple class="w-full border rounded-lg px-4 py-2">
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}" @if($task->users->contains($user->id)) selected @endif>
+                                {{ $user->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
-                    @foreach(\App\Models\User::all() as $user)
-                        <option value="{{ $user->id }}" @if(isset($task) && $task->users->contains($user->id)) selected @endif>
-                            {{ $user->name }}
-                        </option>
-                    @endforeach
+            <!-- DUE DATE (solo admin) -->
+            @if(auth()->user()->isAdmin())
+                <div>
+                    <label class="text-sm text-gray-600">Scadenza</label>
 
-                </select>
-            </div>
+                    <input type="date" name="due_date" value="{{ old('due_date', $task->due_date) }}"
+                        class="w-full border rounded-lg px-4 py-2">
+                </div>
+            @endif
 
-            <!-- DUE DATE -->
-            <div>
-                <label class="text-sm text-gray-600">Scadenza</label>
-
-                <input type="date" name="due_date" value="{{ old('due_date', $task->due_date ?? '') }}"
-                    class="w-full border rounded-lg px-4 py-2">
-            </div>
-
-            <!-- STATUS -->
+            <!-- COMPLETED (sempre visibile ma solo member editable) -->
             <div class="flex items-center gap-2">
-
-                <!-- valore di default -->
-                <input type="hidden" name="completed" value="0">
-
-                <!-- checkbox -->
-                <input type="checkbox" name="completed" value="1" {{ old('completed', $task->completed) ? 'checked' : '' }}>
+                <input type="checkbox" name="completed" value="1" {{ $task->completed ? 'checked' : '' }}
+                    @cannot('complete', $task) disabled @endcannot>
 
                 <label class="text-sm text-gray-600">Completato</label>
             </div>
