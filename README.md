@@ -13,6 +13,8 @@ L’applicazione è progettata con architettura client-server e utilizza API RES
 - Aggiornamento stato task (To Do, In Progress, Done)
 - CRUD completo
 - Comunicazione client-server tramite API REST
+- Sistema di autenticazione utenti (Laravel Breeze)
+- Protezione delle rotte tramite autenticazione
 
 ---
 
