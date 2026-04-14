@@ -1,4 +1,4 @@
-# TaskFlow
+# # TaskFlow – Full Stack Task Manager (Laravel)
 
 TaskFlow è una web application full stack per la gestione di task e workflow, ispirata a strumenti come Asana.
 
