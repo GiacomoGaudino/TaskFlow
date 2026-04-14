@@ -125,5 +125,5 @@ Registrazione di un nuovo utente.
 ### Admin User Management
 Gestione degli utenti da parte dell'amministratore.
 <p align="center">
-  <img src="screenshots/user_list.png" width="700"/>
+  <img src="screenshots/users_list.png" width="700"/>
 </p>
