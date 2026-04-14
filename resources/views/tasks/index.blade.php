@@ -39,11 +39,24 @@
                     </p>
 
                     <!-- STATUS -->
-                    <span
-                        class="inline-block mt-3 text-xs px-3 py-1 rounded-full
-                                                        {{ $task->completed ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
-                        {{ $task->completed ? 'Completato' : 'In corso' }}
-                    </span>
+                    @if(auth()->user()->isAdmin() || $task->users->contains(auth()->id()))
+                        <form method="POST" action="{{ route('tasks.update', $task) }}">
+                            @csrf
+                            @method('PUT')
+
+                            <input type="hidden" name="title" value="{{ $task->title }}">
+                            <input type="hidden" name="description" value="{{ $task->description }}">
+                            <input type="hidden" name="due_date" value="{{ $task->due_date }}">
+
+                            <input type="hidden" name="completed" value="0">
+
+                            <label class="flex items-center gap-2 mt-2">
+                                <input type="checkbox" name="completed" value="1" onchange="this.form.submit()"
+                                    @checked($task->completed)>
+                                <span class="text-sm text-gray-600">Completato</span>
+                            </label>
+                        </form>
+                    @endif
 
                     <!-- UTENTI ASSEGNATI -->
                     @if($task->users->count())
@@ -59,11 +72,11 @@
                     <!-- SCADENZA -->
                     @if($task->due_date)
                         <div class="mt-2 text-xs
-                                                                                @if(\Carbon\Carbon::parse($task->due_date)->isPast())
-                                                                                    text-red-600
-                                                                                @else
-                                                                                    text-gray-500
-                                                                                @endif">
+                                                                                                                    @if(\Carbon\Carbon::parse($task->due_date)->isPast())
+                                                                                                                        text-red-600
+                                                                                                                    @else
+                                                                                                                        text-gray-500
+                                                                                                                    @endif">
                             📅 {{ \Carbon\Carbon::parse($task->due_date)->format('d/m/Y') }}
                         </div>
                     @endif
@@ -72,18 +85,20 @@
 
                 <div class="flex gap-3 items-center">
 
-                    <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:text-blue-800 text-sm">
-                        Edit
-                    </a>
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:text-blue-800 text-sm">
+                            Edit
+                        </a>
 
-                    <form method="POST" action="{{ route('tasks.destroy', $task) }}">
-                        @csrf
-                        @method('DELETE')
+                        <form method="POST" action="{{ route('tasks.destroy', $task) }}">
+                            @csrf
+                            @method('DELETE')
 
-                        <button class="text-red-500 hover:text-red-700 text-sm">
-                            Delete
-                        </button>
-                    </form>
+                            <button class="text-red-500 hover:text-red-700 text-sm">
+                                Delete
+                            </button>
+                        </form>
+                    @endif
 
                 </div>
 

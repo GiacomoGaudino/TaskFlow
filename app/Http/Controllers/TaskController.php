@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Task::class);
-        $tasks = auth()->user()->visibleTasks()->load('users');
+        $tasks = Task::with('users')->get();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -84,29 +84,34 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
 
-        $user = auth()->user();
-
-        if ($user->isAdmin()) {
-            $data = $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'nullable|string',
-                'users' => 'nullable|array',
-                'users.*' => 'exists:users,id',
-                'due_date' => 'nullable|date',
-                'completed' => 'nullable|boolean',
-            ]);
-
-            $task->update($data);
-            $task->users()->sync($request->users ?? []);
-        } else {
-            $data = $request->validate([
-                'completed' => 'required|boolean',
-            ]);
+        // 👤 MEMBER: SOLO completed
+        if (!auth()->user()->isAdmin()) {
 
             $task->update([
-                'completed' => $data['completed']
+                'completed' => $request->boolean('completed'),
             ]);
+
+            return back()->with('success', 'Task aggiornata');
         }
+
+        // 🧑‍💼 ADMIN: tutto il resto
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'users' => 'nullable|array',
+            'users.*' => 'exists:users,id',
+            'due_date' => 'nullable|date',
+            'completed' => 'boolean',
+        ]);
+
+        $task->update([
+            'title' => $data['title'],
+            'description' => $data['description'] ?? null,
+            'due_date' => $data['due_date'] ?? null,
+            'completed' => $request->boolean('completed'),
+        ]);
+
+        $task->users()->sync($data['users'] ?? []);
 
         return redirect()->route('tasks.index')->with('success', 'Task aggiornata');
     }

@@ -11,63 +11,53 @@
             @csrf
             @method('PUT')
 
-            <!-- TITLE -->
-            <div>
-                <label class="text-sm text-gray-600">Titolo</label>
-                <input type="text" name="title" value="{{ old('title', $task->title) }}"
-                    class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none" @cannot('update', $task)
-                    disabled @endcannot>
-            </div>
-
-            <!-- DESCRIPTION -->
-            <div>
-                <label class="text-sm text-gray-600">Descrizione</label>
-                <textarea name="description" class="w-full border rounded-lg px-4 py-2 focus:ring focus:outline-none"
-                    @cannot('update', $task) disabled @endcannot>{{ old('description', $task->description) }}</textarea>
-            </div>
-
-            <!-- USERS (solo admin) -->
+            {{-- 🧑‍💼 ADMIN FULL EDIT --}}
             @if(auth()->user()->isAdmin())
-                <div>
-                    <label class="text-sm text-gray-600">Assegna utenti</label>
 
-                    <select name="users[]" multiple class="w-full border rounded-lg px-4 py-2">
-                        @foreach($users as $user)
-                            <option value="{{ $user->id }}" @if($task->users->contains($user->id)) selected @endif>
+                <div>
+                    <label>Titolo</label>
+                    <input type="text" name="title" value="{{ $task->title }}" class="w-full border rounded p-2">
+                </div>
+
+                <div>
+                    <label>Descrizione</label>
+                    <textarea name="description" class="w-full border rounded p-2">{{ $task->description }}</textarea>
+                </div>
+
+                <div>
+                    <label>Assegna utenti</label>
+                    <select name="users[]" multiple class="w-full border rounded p-2">
+                        @foreach(\App\Models\User::all() as $user)
+                            <option value="{{ $user->id }}" @selected($task->users->contains($user->id))>
                                 {{ $user->name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-            @endif
 
-            <!-- DUE DATE (solo admin) -->
-            @if(auth()->user()->isAdmin())
                 <div>
-                    <label class="text-sm text-gray-600">Scadenza</label>
-
-                    <input type="date" name="due_date" value="{{ old('due_date', $task->due_date) }}"
-                        class="w-full border rounded-lg px-4 py-2">
+                    <label>Scadenza</label>
+                    <input type="date" name="due_date" value="{{ $task->due_date }}" class="w-full border rounded p-2">
                 </div>
+
             @endif
 
-            <!-- COMPLETED (sempre visibile ma solo member editable) -->
+            {{-- 👤 MEMBER + ADMIN (sempre visibile) --}}
             <div class="flex items-center gap-2">
                 <input type="hidden" name="completed" value="0">
 
-                <input type="checkbox" name="completed" value="1" @checked($task->completed) {{ auth()->user()->isAdmin() ? '' : '' }}>
+                <input type="checkbox" name="completed" value="1" @checked($task->completed) @cannot('update', $task)
+                    disabled @endcannot>
 
-                <label class="text-sm text-gray-600">Completato</label>
+                <label>Completato</label>
             </div>
 
-            <!-- BUTTON -->
+            {{-- BUTTON --}}
             <div class="flex justify-between">
-                <a href="{{ route('tasks.index') }}" class="text-gray-500 hover:text-gray-700">
-                    Annulla
-                </a>
+                <a href="{{ route('tasks.index') }}" class="text-gray-500">Annulla</a>
 
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                    Aggiorna Task
+                <button class="bg-blue-600 text-white px-4 py-2 rounded">
+                    Aggiorna
                 </button>
             </div>
 

@@ -41,7 +41,7 @@ class TaskPolicy
             return true;
         }
 
-        return $task->users->contains($user);
+        return $task->users->contains($user->id);
     }
 
     /**
