@@ -53,8 +53,9 @@
 
             <!-- COMPLETED (sempre visibile ma solo member editable) -->
             <div class="flex items-center gap-2">
-                <input type="checkbox" name="completed" value="1" {{ $task->completed ? 'checked' : '' }}
-                    @cannot('complete', $task) disabled @endcannot>
+                <input type="hidden" name="completed" value="0">
+
+                <input type="checkbox" name="completed" value="1" @checked($task->completed) {{ auth()->user()->isAdmin() ? '' : '' }}>
 
                 <label class="text-sm text-gray-600">Completato</label>
             </div>
