@@ -21,6 +21,11 @@
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('tasks.create') }}" class="block p-2 rounded hover:bg-gray-100">Crea Task</a>
                 @endif
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('admin.users') }}" class="block p-2 rounded hover:bg-gray-100">
+                        Utenti
+                    </a>
+                @endif
             </nav>
         </aside>
 
