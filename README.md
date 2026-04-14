@@ -100,7 +100,7 @@ Creazione di un nuovo task.
 Modifica e aggiornamento dei task.
 
 <p align="center">
-  <img src="screenshots/edit_task.png" width="700"/>
+  <img src="screenshots/update_task.png" width="700"/>
 </p>
 
 ---
