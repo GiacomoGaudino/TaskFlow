@@ -1,73 +1,125 @@
-# # TaskFlow – Full Stack Task Manager (Laravel)
+# TaskFlow
 
-TaskFlow è una web application full stack per la gestione di task e workflow, ispirata a strumenti come Asana.
-
-L’applicazione è progettata con architettura client-server e utilizza API REST per la gestione dei dati, simulando il funzionamento di un sistema reale di task management.
+A full-stack task management application inspired by modern tools like Asana, designed to manage projects, tasks, and workflows efficiently.
 
 ---
 
-## 🚀 Features
+## 🚀 Overview
 
-- Creazione e gestione task
-- Organizzazione per progetti e workflow
-- Aggiornamento stato task (To Do, In Progress, Done)
-- CRUD completo
-- Comunicazione client-server tramite API REST
-- Sistema di autenticazione utenti (Laravel Breeze)
-- Protezione delle rotte tramite autenticazione
+TaskFlow is a web application that allows users to create, organize, and track tasks across different stages of completion.
+
+The goal of this project was to build a realistic, business-oriented system that reflects how task management tools work in real-world environments, including authentication, structured workflows, and scalable architecture.
 
 ---
 
-## 🛠️ Tech Stack
+## 🎯 Key Features
 
-### Frontend
-- HTML
-- CSS / SCSS
-- JavaScript
-
-### Backend
-- Laravel
-- MySQL
-
-### Tools
-- Git & GitHub
-- Postman
+* User authentication (Laravel Breeze)
+* Create, update, delete tasks (CRUD operations)
+* Task status management (To Do, In Progress, Done)
+* Project-based organization
+* Protected routes and access control
+* RESTful API structure
+* Clean and responsive UI
 
 ---
 
-## 🧠 Architettura
+## 🧠 What I Built and Learned
 
-Il progetto è suddiviso in due parti principali:
+This project was developed to strengthen my understanding of:
 
-- **Client** → gestione interfaccia utente  
-- **Server** → gestione logica applicativa e API  
+* Laravel MVC architecture
+* Eloquent relationships and data modeling
+* REST API design
+* Authentication and route protection
+* Structuring a scalable backend
+* Managing state and workflows in a real application
 
-Questa separazione riflette un’architettura tipica delle applicazioni moderne basate su API.
-
----
-
-## ⚙️ Funzionalità tecniche
-
-- API REST per la gestione dei task  
-- Operazioni CRUD complete  
-- Gestione stato task  
-- Struttura modulare backend  
-- Connessione e gestione database  
+I focused on writing clean, maintainable code and organizing the project in a way that reflects real development practices.
 
 ---
 
-## 📦 Installazione
+## ⚙️ Tech Stack
 
-### Backend
+* Backend: Laravel (PHP)
+* Frontend: Blade + Tailwind CSS
+* Database: MySQL
+* Authentication: Laravel Breeze
+
+---
+
+## 🏗️ Project Structure
+
+The application follows a standard Laravel structure:
+
+* `app/` → Models, Controllers, Business Logic
+* `routes/` → Web and API routes
+* `resources/views/` → Blade templates
+* `database/` → Migrations and seeders
+
+---
+
+## 🖥️ Demo
+
+[Add your live demo link here]
+
+Demo credentials (optional):
+
+* Email: [test@example.com](mailto:test@example.com)
+* Password: password
+
+---
+
+## 📦 Installation
+
+Clone the repository:
 
 ```bash
-cd server
+git clone https://github.com/GiacomoGaudino/TaskFlow.git
+cd TaskFlow
+```
+
+Install dependencies:
+
+```bash
 composer install
+npm install
+```
+
+Set up environment:
+
+```bash
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
-php artisan serve
 ```
+
+Configure your database in `.env`, then run:
+
+```bash
+php artisan migrate --seed
+php artisan storage:link
+```
+
+Run the application:
+
+```bash
+php artisan serve
+npm run dev
+```
+
+---
+
+## ⚠️ Notes
+
+This project is still evolving. Future improvements may include:
+
+* Drag & drop task management (Kanban-style)
+* User assignment to tasks
+* Notifications system
+* Advanced filtering and search
+* UI/UX refinements
+
+---
 
 ## 📸 Screenshots
 
@@ -129,3 +181,11 @@ Gestione degli utenti da parte dell'amministratore.
 <p align="center">
   <img src="screenshots/users_list.png" width="700"/>
 </p>
+
+---
+
+## 📬 Contact
+
+If you’d like to discuss this project or collaborate, feel free to reach out.
+
+---
