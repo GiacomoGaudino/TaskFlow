@@ -52,10 +52,23 @@ I focused on writing clean, maintainable code and organizing the project in a wa
 
 The application follows a standard Laravel structure:
 
-* `app/` → Models, Controllers, Business Logic
-* `routes/` → Web and API routes
-* `resources/views/` → Blade templates
-* `database/` → Migrations and seeders
+```
+TaskFlow/
+├── app/                # Models, Controllers, Business Logic
+├── bootstrap/          # Application bootstrap files
+├── config/             # Configuration files
+├── database/           # Migrations and seeders
+├── public/             # Entry point (index.php, assets)
+├── resources/
+│   └── views/          # Blade templates
+├── routes/             # Web and API routes
+├── storage/            # Logs, cache, uploaded files
+├── tests/              # Feature and unit tests
+├── .env.example        # Environment template
+├── composer.json       # PHP dependencies
+├── package.json        # Frontend dependencies
+└── README.md
+```
 
 ---
 
@@ -63,7 +76,7 @@ The application follows a standard Laravel structure:
 
 [Add your live demo link here]
 
-Demo credentials (optional):
+Demo credentials:
 
 * Email: [test@example.com](mailto:test@example.com)
 * Password: password
@@ -124,6 +137,7 @@ This project is still evolving. Future improvements may include:
 ## 📸 Screenshots
 
 ### Dashboard
+
 Panoramica generale dell’applicazione.
 
 <p align="center">
@@ -133,6 +147,7 @@ Panoramica generale dell’applicazione.
 ---
 
 ### Task List
+
 Visualizzazione dei task organizzati per progetto.
 
 <p align="center">
@@ -142,6 +157,7 @@ Visualizzazione dei task organizzati per progetto.
 ---
 
 ### Create Task
+
 Creazione di un nuovo task.
 
 <p align="center">
@@ -151,6 +167,7 @@ Creazione di un nuovo task.
 ---
 
 ### Update Task
+
 Modifica e aggiornamento dei task.
 
 <p align="center">
@@ -160,6 +177,7 @@ Modifica e aggiornamento dei task.
 ---
 
 ### Login
+
 Accesso all'applicazione.
 
 <p align="center">
@@ -169,7 +187,9 @@ Accesso all'applicazione.
 ---
 
 ### Register
+
 Registrazione di un nuovo utente.
+
 <p align="center">
   <img src="screenshots/register.png" width="700"/>
 </p>
@@ -177,7 +197,9 @@ Registrazione di un nuovo utente.
 ---
 
 ### Admin User Management
+
 Gestione degli utenti da parte dell'amministratore.
+
 <p align="center">
   <img src="screenshots/users_list.png" width="700"/>
 </p>
@@ -189,3 +211,6 @@ Gestione degli utenti da parte dell'amministratore.
 If you’d like to discuss this project or collaborate, feel free to reach out.
 
 ---
+
+
+
